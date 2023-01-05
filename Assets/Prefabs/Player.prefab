@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3463160589737214174}
   - component: {fileID: 3463160589737214169}
   - component: {fileID: 3463160589737214115}
+  - component: {fileID: 5489906625128030821}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -119,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b2eb4379057e04b8fe0004892a4b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isReversing: 0
   _slowTimeScale: 0.5
 --- !u!114 &3463160589737214175
 MonoBehaviour:
@@ -360,6 +360,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!114 &5489906625128030821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463160589737214168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4555fc47e33fb499471fbff9551744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3463160589960291276
 GameObject:
   m_ObjectHideFlags: 0

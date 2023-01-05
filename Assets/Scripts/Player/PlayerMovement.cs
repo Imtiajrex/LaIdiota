@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isDashing)
+        if (_isDashing ||  (GameManager.Instance && GameManager.Instance.isReversing))
         {
             return;
         }
@@ -55,9 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDash(InputValue inputValue)
     {
-        if (inputValue.isPressed && _canDash && !_isDashing)
+        if ((inputValue.isPressed && _canDash && !_isDashing) || _movementInput != Vector2.zero || (GameManager.Instance && !GameManager.Instance.isReversing))
         {
-            Debug.Log("Dash");
             StartCoroutine(Dash());
         }
     }

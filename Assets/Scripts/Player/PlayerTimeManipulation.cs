@@ -5,14 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerTimeManipulation : MonoBehaviour
 {
-    bool _isReversing = false;
     [SerializeField] float _slowTimeScale = 0.5f;
 
 
     private void OnReverse(InputValue inputValue) { 
 
-        if(inputValue.Get<float>() == 1) _isReversing = true;
-        else if(inputValue.Get<float>() == 0) _isReversing = false;
+        if(inputValue.Get<float>() == 1) GameManager.Instance.isReversing = true;
+        else if(inputValue.Get<float>() == 0) GameManager.Instance.isReversing = false;
     }
 
     private void OnSlow(InputValue inputValue) { 
