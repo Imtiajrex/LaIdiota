@@ -10,16 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 3463160589737214114}
   - component: {fileID: 3463160589737214173}
-  - component: {fileID: 3463160589737214172}
-  - component: {fileID: 3463160589737214112}
   - component: {fileID: 3463160589737214175}
   - component: {fileID: 3463160589737214174}
   - component: {fileID: 3463160589737214169}
   - component: {fileID: 3463160589737214115}
   - component: {fileID: 5489906625128030821}
+  - component: {fileID: 7332219815301479153}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,35 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3463160589737214172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463160589737214168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e460a8d66bbd9a46901f92ccccdbd94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 30
-  _dashingPower: 100
-  _dashingTime: 0.075
-  _dashingCooldown: 1
---- !u!114 &3463160589737214112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463160589737214168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b2eb4379057e04b8fe0004892a4b87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slowTimeScale: 0.5
 --- !u!114 &3463160589737214175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +342,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4555fc47e33fb499471fbff9551744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7332219815301479153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463160589737214168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c006bf0f1b3e7f4eaa8fa510aa871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 35
+  _dashingPower: 100
+  _dashingTime: 0.15
+  _dashingCooldown: 1
+  _slowTimeScale: 0.5
 --- !u!1 &3463160589960291276
 GameObject:
   m_ObjectHideFlags: 0

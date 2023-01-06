@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movementInput;
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
+    [SerializeField] float _slowTimeScale = 0.5f;
+
+
+
 
     private void Awake()
     {
@@ -34,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isDashing ||  (GameManager.Instance && GameManager.Instance.isReversing))
+        if (_isDashing || (GameManager.Instance && GameManager.Instance.isReversing))
         {
             return;
         }
@@ -60,17 +64,34 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
     }
+    private void OnReverse(InputValue inputValue)
+    {
 
+        if (inputValue.Get<float>() == 1) GameManager.Instance.isReversing = true;
+        else if (inputValue.Get<float>() == 0) GameManager.Instance.isReversing = false;
+    }
+
+    private void OnSlow(InputValue inputValue)
+    {
+        if (inputValue.Get<float>() == 1) Time.timeScale = _slowTimeScale;
+        else if (inputValue.Get<float>() == 0) Time.timeScale = 1f;
+    }
     private IEnumerator Dash()
     {
         _canDash = false;
         _isDashing = true;
-        _rigidbody.velocity = _rigidbody.velocity.normalized * _dashingPower;
+        _rigidbody.velocity = _movementInput * _dashingPower;
         _tr.emitting = true;
         yield return new WaitForSeconds(_dashingTime);
         _tr.emitting = false;
         _isDashing = false;
         yield return new WaitForSeconds(_dashingCooldown);
         _canDash = true;
+    }
+
+    public void Fall()
+    {
+        if (_isDashing) return;
+        Debug.Log("Die");
     }
 }
