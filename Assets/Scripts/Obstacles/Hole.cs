@@ -10,7 +10,7 @@ public class Hole : MonoBehaviour
     {
         if (_player && _player.GetComponent<Rigidbody2D>().velocity.magnitude < 0.05f)
         {
-            _player.GetComponent<PlayerController>().Fall();
+            Fall();
             _player = null;
         }
 
@@ -20,10 +20,13 @@ public class Hole : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _player = other.gameObject;
-            other.gameObject.GetComponent<PlayerController>().Fall();
+            Fall();
         }
     }
-
+    private void Fall()
+    {
+        StartCoroutine(_player.GetComponent<PlayerController>().Fall(transform.position));
+    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")

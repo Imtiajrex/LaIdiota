@@ -16,6 +16,7 @@ public class SwitchDoor : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance && GameManager.Instance.isReversing) return;
         if (_switch.GetComponent<Switch>().on)
         {
             transform.position = Vector2.MoveTowards(transform.position, _openPosition, _speed * Time.deltaTime);
