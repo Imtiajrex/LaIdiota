@@ -19,5 +19,6 @@ public class GameManager : MonoBehaviour
         }
     }
     public bool isReversing = false;
+    public bool isTimeSlowed = false;
 
 }
