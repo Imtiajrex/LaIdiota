@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance && GameManager.Instance.isReversing)
+        if (isNotActive())
             return;
         if (!_canDash)
         {
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (_isDashing || (GameManager.Instance && GameManager.Instance.isReversing))
+        if (_isDashing || isNotActive())
         {
             return;
         }
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
             0.1f
         );
 
-        _rigidbody.velocity = _smoothedMovementInput * _speed;
+        _rigidbody.velocity = _smoothedMovementInput * (GameManager.Instance.isReversing ? _speed / _slowTimeScale : _speed);
     }
 
     private void OnMove(InputValue inputValue)
@@ -71,7 +71,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnDash(InputValue inputValue)
     {
-        if (GameManager.Instance && GameManager.Instance.isReversing) return;
+        if (isNotActive()) return;
+
         if ((inputValue.isPressed && _canDash && !_isDashing))
         {
             StartCoroutine(Dash());
@@ -83,9 +84,13 @@ public class PlayerController : MonoBehaviour
         else if (inputValue.Get<float>() == 0) GameManager.Instance.isReversing = false;
     }
 
+    private bool isNotActive()
+    {
+        return (GameManager.Instance && GameManager.Instance.isReversing) || health <= 0;
+    }
     private void OnSlow(InputValue inputValue)
     {
-        if (GameManager.Instance && GameManager.Instance.isReversing) return;
+        if (isNotActive()) return;
 
         if (inputValue.Get<float>() == 1) Time.timeScale = _slowTimeScale;
         else if (inputValue.Get<float>() == 0) Time.timeScale = 1f;
@@ -114,19 +119,22 @@ public class PlayerController : MonoBehaviour
         _canDash = true;
     }
 
-    public IEnumerator Fall()
+    public IEnumerator Fall(Vector3 holePos)
     {
         if (_isDashing) yield break;
         _rigidbody.velocity = Vector2.zero;
+        health = 0;
         //decrease size of player
         Vector3 originalScale = transform.localScale;
-        Vector3 destinationScale = new Vector3(0.1f, 0.1f, 0.1f);
+
         float currentTime = 0.0f;
+        float time = 0.35f; // the time to reach the destination & scale
         do
         {
-            transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / 1f);
+            transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, currentTime / time);
+            transform.position = Vector3.Lerp(transform.position, holePos, currentTime / time);
             currentTime += Time.deltaTime;
             yield return null;
-        } while (currentTime <= 0.5f);
+        } while (currentTime <= time);
     }
 }

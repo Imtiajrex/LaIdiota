@@ -358,7 +358,9 @@ MonoBehaviour:
   _dashingPower: 100
   _dashingTime: 0.15
   _dashingCooldown: 1
-  _slowTimeScale: 0.5
+  _dashCooldownTime: 1
+  _slowTimeScale: 0.4
+  health: 100
 --- !u!1 &3463160589960291276
 GameObject:
   m_ObjectHideFlags: 0
