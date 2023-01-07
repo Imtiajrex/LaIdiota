@@ -6,7 +6,7 @@ public class Switch : MonoBehaviour
 {
     public bool on = false;
     [SerializeField]
-    private Color _onColor;
+    private Color _onColor = new Color(0.1254902f, 0.7529412f, 0.5372549f);
     [SerializeField]
     private Color _offColor;
 

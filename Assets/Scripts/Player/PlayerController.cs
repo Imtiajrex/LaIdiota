@@ -95,13 +95,11 @@ public class PlayerController : MonoBehaviour
         if (inputValue.Get<float>() == 1)
         {
             Time.timeScale = _slowTimeScale;
-            Time.fixedDeltaTime = _slowTimeScale * Time.timeScale;
             GameManager.Instance.isTimeSlowed = true;
         }
         else if (inputValue.Get<float>() == 0)
         {
             Time.timeScale = 1f;
-            Time.fixedDeltaTime = Time.timeScale;
             GameManager.Instance.isTimeSlowed = false;
         }
     }
