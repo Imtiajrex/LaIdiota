@@ -41,15 +41,16 @@ public class TimeReversal : MonoBehaviour
 
         if (_pointsInTime.Count > 0)
         {
-            transform.position = _pointsInTime[0]._transform.position;
-            transform.rotation = _pointsInTime[0]._transform.rotation;
-            transform.localScale = _pointsInTime[0]._transform.localScale;
+            Debug.Log(_pointsInTime.Count);
+            transform.position = _pointsInTime[0].position;
+            transform.rotation = _pointsInTime[0].rotation;
+            transform.localScale = _pointsInTime[0].localScale;
             _pointsInTime.RemoveAt(0);
         }
     }
     void Record()
     {
         if (_rigidBody) _rigidBody.bodyType = _rigidBodyType;
-        _pointsInTime.Insert(0, new PointInTime(transform));
+        _pointsInTime.Insert(0, new PointInTime(transform.position, transform.rotation, transform.localScale));
     }
 }
