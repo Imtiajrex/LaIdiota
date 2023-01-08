@@ -218,7 +218,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -359,7 +359,7 @@ MonoBehaviour:
   _dashingTime: 0.15
   _dashingCooldown: 1
   _dashCooldownTime: 1
-  _slowTimeScale: 0.4
+  _slowTimeScale: 0.35
   health: 100
 --- !u!1 &3463160589960291276
 GameObject:

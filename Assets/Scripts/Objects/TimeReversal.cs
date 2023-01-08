@@ -9,39 +9,47 @@ public class TimeReversal : MonoBehaviour
     private float _reverseTime = 5f;
     private RigidbodyType2D _rigidBodyType;
 
-     void Awake()
+    void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        if(_rigidBody) _rigidBodyType = _rigidBody.bodyType;
+        if (_rigidBody) _rigidBodyType = _rigidBody.bodyType;
     }
 
 
-     void FixedUpdate()
+    void FixedUpdate()
     {
-        if(GameManager.Instance && GameManager.Instance.isReversing)
+        if (GameManager.Instance && GameManager.Instance.isReversing)
         {
             Rewind();
-        }else
+        }
+        else
         {
             Record();
         }
     }
-    void Rewind(){
-        if(_rigidBody){
+    void Rewind()
+    {
+        if (_rigidBody)
+        {
             _rigidBody.velocity = Vector2.zero;
             _rigidBody.bodyType = RigidbodyType2D.Kinematic;
         }
-        if(_pointsInTime.Count > Mathf.Round(_reverseTime / Time.fixedDeltaTime)){
+        if (_pointsInTime.Count > Mathf.Round(_reverseTime / Time.fixedDeltaTime))
+        {
             _pointsInTime.RemoveAt(_pointsInTime.Count - 1);
         }
 
-        if(_pointsInTime.Count > 0){
-            transform.position = _pointsInTime[0].position;
+        if (_pointsInTime.Count > 0)
+        {
+            transform.position = _pointsInTime[0]._transform.position;
+            transform.rotation = _pointsInTime[0]._transform.rotation;
+            transform.localScale = _pointsInTime[0]._transform.localScale;
             _pointsInTime.RemoveAt(0);
         }
     }
-    void Record(){
-        if(_rigidBody) _rigidBody.bodyType = _rigidBodyType;
-        _pointsInTime.Insert(0,new PointInTime(transform.position,transform.rotation));
+    void Record()
+    {
+        if (_rigidBody) _rigidBody.bodyType = _rigidBodyType;
+        _pointsInTime.Insert(0, new PointInTime(transform));
     }
 }

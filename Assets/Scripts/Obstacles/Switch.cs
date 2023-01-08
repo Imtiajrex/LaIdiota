@@ -5,9 +5,7 @@ using UnityEngine;
 public class Switch : MonoBehaviour
 {
     public bool on = false;
-    [SerializeField]
     private Color _onColor = new Color(0.1254902f, 0.7529412f, 0.5372549f);
-    [SerializeField]
     private Color _offColor;
 
     private SpriteRenderer _spriteRenderer;
@@ -18,7 +16,7 @@ public class Switch : MonoBehaviour
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.color = _offColor;
+        _offColor = _spriteRenderer.color;
     }
     void Update()
     {
