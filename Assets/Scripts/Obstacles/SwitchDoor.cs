@@ -13,10 +13,16 @@ public class SwitchDoor : MonoBehaviour
 
     [SerializeField]
     private float _speed = 10f;
+    [SerializeField]
+    private SpriteRenderer _doorColorCode;
+
 
     private void Update()
     {
+        _doorColorCode.color = _switch.GetComponent<SpriteRenderer>().color;
+
         if (GameManager.Instance && GameManager.Instance.isReversing) return;
+
         if (_switch.GetComponent<Switch>().on)
         {
             transform.position = Vector2.MoveTowards(transform.position, _openPosition, _speed * Time.deltaTime);

@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isNotActive()) return;
 
-        if ((inputValue.isPressed && _canDash && !_isDashing))
+        if ((inputValue.isPressed && _canDash && !_isDashing && _movementInput.magnitude > 0.1f))
         {
             StartCoroutine(Dash());
         }
@@ -108,16 +108,7 @@ public class PlayerController : MonoBehaviour
         _canDash = false;
         _isDashing = true;
         _dashCooldownTime = 0;
-        float xValue = Mathf.Ceil(Mathf.Abs(_movementInput.x));
-        float yValue = Mathf.Ceil(Mathf.Abs(_movementInput.y));
-        xValue = _movementInput.x < 0 ? -xValue : xValue;
-        yValue = _movementInput.y < 0 ? -yValue : yValue;
-        bool goingCorner = Mathf.Abs(xValue) == 1 && Mathf.Abs(yValue) == 1;
-
-
-        xValue = goingCorner ? xValue / 2 : xValue;
-        yValue = goingCorner ? yValue / 2 : yValue;
-        Vector2 direction = new Vector2(xValue, yValue);
+        Vector2 direction = _movementInput.normalized;
         _rigidbody.velocity = direction * _dashingPower;
         _tr.emitting = true;
         yield return new WaitForSeconds(_dashingTime);
